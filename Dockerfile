@@ -1,3 +1,3 @@
 FROM alpine
-ADD qiniu /bin/
-ENTRYPOINT /bin/qiniu
+ADD http-uploader /bin/
+ENTRYPOINT /bin/http-uploader
