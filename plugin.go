@@ -67,6 +67,8 @@ func (p Plugin) Exec() (err error) {
 		return
 	}
 
+	log.Print("upload success")
+
 	return
 }
 

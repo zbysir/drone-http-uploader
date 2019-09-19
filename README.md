@@ -15,6 +15,13 @@ SET CGO_ENABLED=0
 go build -o http-uploader
 ```
 
+then push to docker
+
+```
+sudo docker build . -t bysir/drone-http-uploader:latest
+sudo docker push bysir/drone-http-uploader:latest
+```
+
 ## test
 
 ```
@@ -35,6 +42,6 @@ pipeline:
     secrets: [ secret ]
     debug: true
     path: "./"
-    url: "http://static.test.zhuzi.me/api/v1/upload?secret=${SECRET}"
+    url: "http://static.test.zhuzi.me/api/v1/upload?secret={{SECRET}}"
 
 ```
