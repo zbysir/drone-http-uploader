@@ -105,7 +105,7 @@ func (p Plugin) upload(path string, fileName string) (result string, err error) 
 	return
 }
 
-func (p Plugin) prepare() (err error) {
+func (p *Plugin) prepare() (err error) {
 	// 将environ k=v组装为map
 	env := os.Environ()
 	envMap := make(map[string]string)
