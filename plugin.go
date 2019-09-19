@@ -21,6 +21,11 @@ type Plugin struct {
 }
 
 func (p Plugin) Exec() (err error) {
+	err = p.prepare()
+	if err != nil {
+		return
+	}
+
 	if p.Url == "" {
 		err = errors.New("bad url")
 		return
@@ -94,6 +99,25 @@ func (p Plugin) upload(path string, fileName string) (result string, err error) 
 		err = fmt.Errorf("response is [%d] %s", rsp.StatusCode, result)
 		return
 	}
+
+	return
+}
+
+func (p Plugin) prepare() (err error) {
+	// 将environ k=v组装为map
+	env := os.Environ()
+	envMap := make(map[string]string)
+	for _, v := range env {
+		ss := strings.Split(v, "=")
+		if len(ss) < 2 {
+			continue
+		}
+		key := strings.ToUpper(strings.Trim(ss[0], " "))
+		envMap[key] = strings.Trim(ss[1], " ")
+	}
+
+	// 注入变量
+	p.Url = injectEnv(p.Url, envMap)
 
 	return
 }

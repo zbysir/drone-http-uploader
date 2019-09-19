@@ -18,7 +18,23 @@ go build -o http-uploader
 ## test
 
 ```
-SET URL=http://localhost:8080/api/v1/upload?secret=1
+SET URL=http://localhost:8080/api/v1/upload?secret=${SECRET}
 SET DEBUG=true
 SET PATH=E:\tmp\test_static
+SET SECRET=xxx
+
+./http-uploader
+```
+
+## usage
+```yaml
+pipeline:
+  upload:
+    image: bysir/drone-http-uploader:latest
+    privileged: true
+    secrets: [ secret ]
+    debug: true
+    path: "./"
+    url: "http://static.test.zhuzi.me/api/v1/upload?secret=${SECRET}"
+
 ```
