@@ -1,4 +1,4 @@
-# drone-qiniu
+# drone-http-uploader
 上传文件到http服务器
 
 ## build
